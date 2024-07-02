@@ -27,13 +27,13 @@ class TimelineRequest extends FormRequest
         if (request()->isMethod('post')){
             return [
                 'title' => ['required', 'max:1024'],
-                'description' => ['max:1024'],
+                'description' => ['required', 'max:1024'],
                 'date' => ['required', 'max:1024'],
             ];
         } else {
             return [
                 'title' => ['required', 'max:1024'],
-                'description' => ['max:1024'],
+                'description' => ['required', 'max:1024'],
                 'date' => ['required', 'max:1024'],
             ];
         }
@@ -45,11 +45,13 @@ class TimelineRequest extends FormRequest
         if (request()->isMethod('post')){
             return [
                 'title.required' => '제목을 입력하세요.',
+                'description.required' => '설명을 입력하세요.',
                 'date.required' => '날짜를 입력하세요.',
             ];
         } else {
             return [
                 'title.required' => '제목을 입력하세요.',
+                'description.required' => '설명을 입력하세요.',
                 'date.required' => '날짜를 입력하세요.',
             ];
         }

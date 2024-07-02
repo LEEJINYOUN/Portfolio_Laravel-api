@@ -52,4 +52,25 @@ class SkillController extends Controller
                 ],500);
             }
     }
+
+    // 스킬 데이터 삭제
+    public function destroySkill (Skill $skill) {
+
+        try{
+            // 선택한 데이터 삭제
+            $skill->delete();
+
+            // 삭제 성공
+            return response()->json([
+                'message' => "스킬 삭제 완료."
+            ],201);
+
+        } catch (\Exception $e){
+
+            // 스킬 삭제 실패
+            return response()->json([
+                'message' => "오류가 있습니다."
+            ],500);
+        }
+    }
 }
