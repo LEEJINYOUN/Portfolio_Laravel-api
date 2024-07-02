@@ -74,4 +74,47 @@ class TimelineController extends Controller
             ],500);
         }
     }
+
+    // 타임라인 데이터 업데이트
+    public function updateTimeline (Request $request, Timeline $timeline) {
+        try{
+
+            // 데이터 검증
+            $validated = $request->validate([
+                'title' => ['required', 'max:1024'],
+                'description' => ['required', 'max:1024'],
+                'date' => ['required', 'max:1024'],
+            ]);
+
+            // 데이터 업데이트
+            $timeline->update($validated);
+
+            // 타임라인 수정 실패
+            if (!$timeline){
+                return response()->json([
+                    'message' => "타임라인 수정 실패했습니다. 다시 시도하세요."
+                ],400);
+            }
+
+            // 타임라인 수정 성공
+            return response()->json([
+                'message' => "타임라인 수정 성공했습니다."
+            ],201);
+
+        } catch (\Exception $e){
+
+            // 타임라인 작성 실패
+            return response()->json([
+                'message' => "오류가 있습니다."
+            ],500);
+        }
+    }
+
+    // 선택한 타임라인 데이터 가져오기
+    public function readTimeline(Timeline $timeline) {
+        return response()->json([
+            'results' => $timeline,
+            'message' => "타임라인 가져오기 성공"
+        ], 200);
+    }
 }
