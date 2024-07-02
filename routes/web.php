@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TimelineController;
 use Illuminate\Support\Facades\Route;
@@ -39,3 +40,20 @@ Route::get('/skill/{skill}', [SkillController::class, 'readSkill']);
 
 // 선택한 스킬 데이터 업데이트
 Route::patch('/skill/{skill}', [SkillController::class,'updateSkill']);
+
+
+
+// 포트폴리오 생성
+Route::post('/createPortfolio', [PortfolioController::class, 'createPortfolio']);
+
+// 포트폴리오 데이터 가져오기
+Route::get('/getPortfolio', [PortfolioController::class, 'getPortfolio']);
+
+// 포트폴리오 삭제
+Route::delete('/portfolio/{portfolio}', [PortfolioController::class, 'destroyPortfolio']);
+
+// 선택한 포트폴리오 데이터 가져오기
+Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'readPortfolio']);
+
+// 선택한 포트폴리오 데이터 업데이트
+Route::patch('/portfolio/{portfolio}', [PortfolioController::class,'updatePortfolio']);
