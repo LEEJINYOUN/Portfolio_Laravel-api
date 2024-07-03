@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PortDesController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TimelineController;
@@ -57,3 +58,20 @@ Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'readPortfolio
 
 // 선택한 포트폴리오 데이터 업데이트
 Route::patch('/portfolio/{portfolio}', [PortfolioController::class,'updatePortfolio']);
+
+
+
+// 설명 생성
+Route::post('/createDes', [PortDesController::class, 'createDes']);
+
+// 설명 데이터 가져오기
+Route::post('/getDes/{Des}', [PortDesController::class, 'getDes']);
+
+// 설명 삭제
+Route::delete('/Des/{Des}', [PortDesController::class, 'destroyDes']);
+
+// 선택한 설명 데이터 가져오기
+Route::get('/Des/{Des}', [PortDesController::class, 'readDes']);
+
+// 선택한 설명 데이터 업데이트
+Route::patch('/Des/{Des}', [PortDesController::class,'updateDes']);
