@@ -21,7 +21,7 @@ class Portfolio extends Model
     ];
 
     // 포트폴리오와 설명의 관계 함수 (일 대 다수)
-    public function post(): HasMany
+    public function portfolio(): HasMany
     {
         return $this->hasMany(PortDes::class);
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PortDes extends Model
 {
@@ -16,4 +17,9 @@ class PortDes extends Model
     protected $fillable = [
         'portfolio_id', 'des'
     ];
+
+    public function portDes(): BelongsTo
+    {
+        return $this->belongsTo(Portfolio::class);
+    }
 }

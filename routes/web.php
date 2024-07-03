@@ -65,13 +65,13 @@ Route::patch('/portfolio/{portfolio}', [PortfolioController::class,'updatePortfo
 Route::post('/createDes', [PortDesController::class, 'createDes']);
 
 // 설명 데이터 가져오기
-Route::post('/getDes/{Des}', [PortDesController::class, 'getDes']);
+Route::get('/getDes', [PortDesController::class, 'getDes']);
 
 // 설명 삭제
-Route::delete('/Des/{Des}', [PortDesController::class, 'destroyDes']);
+Route::delete('/des/{des}', [PortDesController::class, 'destroyDes']);
 
 // 선택한 설명 데이터 가져오기
-Route::get('/Des/{Des}', [PortDesController::class, 'readDes']);
+Route::get('/des/{des}', [PortDesController::class, 'readDes']);
 
 // 선택한 설명 데이터 업데이트
-Route::patch('/Des/{Des}', [PortDesController::class,'updateDes']);
+Route::patch('/des/{des}', [PortDesController::class,'updateDes']);
