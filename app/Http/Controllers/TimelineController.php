@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class TimelineController extends Controller
 {
-    // 타임라인 리스트 가져오기
-    public function getTimeline(){
+    // 전체 리스트 가져오기
+    public function index (){
 
         // 타임라인 데이터 불러오기
         $timeline = Timeline::get();
@@ -21,9 +21,8 @@ class TimelineController extends Controller
         ], 200);
     }
 
-    // 타임라인 데이터 생성
-    public function createTimeline(TimelineRequest $request){
-
+    // 데이터 저장
+    public function store (TimelineRequest $request){
         try{
 
             // 테이블 생성
@@ -33,50 +32,38 @@ class TimelineController extends Controller
                 'date' => $request->date,
             ]);
 
-            // 타임라인 작성 실패
+            // 생성한 데이터 저장 실패
             if (!$timeline){
                 return response()->json([
-                    'message' => "타임라인 작성 실패했습니다. 다시 시도하세요."
+                    'message' => "생성한 데이터 저장 실패했습니다. 다시 시도하세요."
                 ],400);
             }
 
-            // 타임라인 작성 성공
+            // 생성한 데이터 저장 성공
             return response()->json([
-                'message' => "타임라인 작성 성공했습니다."
+                'message' => "생성한 데이터 저장 성공했습니다."
             ],201);
 
         } catch (\Exception $e) {
 
-            // 타임라인 작성 실패
+            // 생성한 데이터 저장 실패
                 return response()->json([
+                    "result" => $e,
                     'message' => "오류가 있습니다."
                 ],500);
             }
     }
 
-    // 타임라인 데이터 삭제
-    public function destroyTimeline (Timeline $timeline) {
-
-        try{
-            // 선택한 데이터 삭제
-            $timeline->delete();
-
-            // 삭제 성공
-            return response()->json([
-                'message' => "타임라인 삭제 완료."
-            ],201);
-
-        } catch (\Exception $e){
-
-            // 타임라인 삭제 실패
-            return response()->json([
-                'message' => "오류가 있습니다."
-            ],500);
-        }
+    // 선택한 데이터 가져오기
+    public function show (Timeline $timeline) {
+        return response()->json([
+            'results' => $timeline,
+            'message' => "타임라인 가져오기 성공"
+        ], 200);
     }
 
-    // 타임라인 데이터 업데이트
-    public function updateTimeline (Request $request, Timeline $timeline) {
+    // 데이터 업데이트
+    public function update (Request $request, Timeline $timeline) {
         try{
 
             // 데이터 검증
@@ -103,18 +90,33 @@ class TimelineController extends Controller
 
         } catch (\Exception $e){
 
-            // 타임라인 작성 실패
+            // 타임라인 수정 실패
             return response()->json([
+                "result" => $e,
                 'message' => "오류가 있습니다."
             ],500);
         }
     }
 
-    // 선택한 타임라인 데이터 가져오기
-    public function readTimeline(Timeline $timeline) {
-        return response()->json([
-            'results' => $timeline,
-            'message' => "타임라인 가져오기 성공"
-        ], 200);
+    // 데이터 삭제
+    public function destroy (Timeline $timeline) {
+        try{
+            // 선택한 데이터 삭제
+            $timeline->delete();
+
+            // 삭제 성공
+            return response()->json([
+                'message' => "타임라인 삭제 완료."
+            ],201);
+
+        } catch (\Exception $e){
+
+            // 타임라인 삭제 실패
+            return response()->json([
+                "result" => $e,
+                'message' => "오류가 있습니다."
+            ],500);
+        }
     }
+
 }

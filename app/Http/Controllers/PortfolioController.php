@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
 {
-    // 포트폴리오 리스트 가져오기
-    public function getPortfolio(){
+    // 전체 리스트 가져오기
+    public function index (){
 
         // 포트폴리오 데이터 불러오기
         $portfolio = Portfolio::get();
@@ -21,9 +21,8 @@ class PortfolioController extends Controller
         ], 200);
     }
 
-    // 포트폴리오 데이터 생성
-    public function createPortfolio(PortfolioRequest $request){
-
+    // 데이터 저장
+    public function store (PortfolioRequest $request){
         try{
 
             // 테이블 생성
@@ -41,50 +40,38 @@ class PortfolioController extends Controller
                 'page' => $request->page,
             ]);
 
-            // 포트폴리오 작성 실패
+            // 생성한 데이터 저장 실패
             if (!$portfolio){
                 return response()->json([
-                    'message' => "포트폴리오 작성 실패했습니다. 다시 시도하세요."
+                    'message' => "생성한 데이터 저장 실패했습니다. 다시 시도하세요."
                 ],400);
             }
 
-            // 포트폴리오 작성 성공
+            // 생성한 데이터 저장 성공
             return response()->json([
-                'message' => "포트폴리오 작성 성공했습니다."
+                'message' => "생성한 데이터 저장 성공했습니다."
             ],201);
 
         } catch (\Exception $e) {
 
-            // 포트폴리오 작성 실패
+            // 생성한 데이터 저장 실패
                 return response()->json([
+                    "result" => $e,
                     'message' => "오류가 있습니다."
                 ],500);
             }
     }
 
-    // 포트폴리오 데이터 삭제
-    public function destroyPortfolio(Portfolio $portfolio) {
-
-        try{
-            // 선택한 데이터 삭제
-            $portfolio->delete();
-
-            // 삭제 성공
-            return response()->json([
-                'message' => "포트폴리오 삭제 완료."
-            ],201);
-
-        } catch (\Exception $e){
-
-            // 포트폴리오 삭제 실패
-            return response()->json([
-                'message' => "오류가 있습니다."
-            ],500);
-        }
+    // 선택한 데이터 가져오기
+    public function show (Portfolio $portfolio) {
+        return response()->json([
+            'results' => $portfolio,
+            'message' => "포트폴리오 가져오기 성공"
+        ], 200);
     }
 
-    // 포트폴리오 데이터 업데이트
-    public function updatePortfolio (Request $request, Portfolio $portfolio) {
+    // 데이터 업데이트
+    public function update (Request $request, Portfolio $portfolio) {
         try{
 
             // 데이터 검증
@@ -121,16 +108,32 @@ class PortfolioController extends Controller
 
             // 포트폴리오 작성 실패
             return response()->json([
+                "result" => $e,
                 'message' => "오류가 있습니다."
             ],500);
         }
     }
 
-    // 선택한 포트폴리오 데이터 가져오기
-    public function readPortfolio(Portfolio $portfolio) {
-        return response()->json([
-            'results' => $portfolio,
-            'message' => "포트폴리오 가져오기 성공"
-        ], 200);
+    // 데이터 삭제
+    public function destroy(Portfolio $portfolio) {
+        try{
+            // 선택한 데이터 삭제
+            $portfolio->delete();
+
+            // 삭제 성공
+            return response()->json([
+                'message' => "포트폴리오 삭제 완료."
+            ],201);
+
+        } catch (\Exception $e){
+
+            // 포트폴리오 삭제 실패
+            return response()->json([
+                "result" => $e,
+                'message' => "오류가 있습니다."
+            ],500);
+        }
     }
+
+
 }
