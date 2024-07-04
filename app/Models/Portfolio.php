@@ -19,6 +19,7 @@ class Portfolio extends Model
         'url', 'github', 'page',
     ];
 
+    // 포트폴리오와 설명의 관계 함수 (일 대 다수)
     public function portfolioDes(){
         return $this->hasMany(PortfolioDes::class);
     }

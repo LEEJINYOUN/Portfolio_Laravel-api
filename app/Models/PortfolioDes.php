@@ -18,6 +18,7 @@ class PortfolioDes extends Model
         'portfolio_id', 'des',
     ];
 
+    // 설명과 포트폴리오의 관계 함수 (다수 대 일)
     public function portfolio(): BelongsTo{
         return $this->belongsTo(Portfolio::class);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PortfolioDesRequest;
 use App\Models\Portfolio;
 use App\Models\PortfolioDes;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class PortfolioDesController extends Controller
     }
 
     // 데이터 저장
-    public function store (Portfolio $portfolio, Request $request){
+    public function store (Portfolio $portfolio, PortfolioDesRequest $request){
         try{
 
             // 테이블 생성

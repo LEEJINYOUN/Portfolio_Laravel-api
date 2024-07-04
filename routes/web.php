@@ -10,10 +10,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// 1. 주소 대소문자 주의
-// 2. 컨트롤러에 설정한 함수명 주의
-// 3. resource 이용하면 주소와 함수명 자동 설정
-//  ('php artisan route:list' 으로 확인)
+// 1. 주소 대소문자 주의, 컨트롤러에 설정한 함수명 주의
+// 2. resource 이용하면 주소와 함수명 자동 설정 ('php artisan route:list' 으로 확인)
 
 // 타임라인 액션
 Route::resource('timeline', TimelineController::class);
