@@ -25,17 +25,17 @@ Route::resource('skill', SkillController::class);
 Route::resource('portfolio', PortfolioController::class);
 
 
-// 설명 생성
-Route::post('/portfolio/{portfolio}/des', [PortfolioDesController::class, 'store']);
-
-// 설명 데이터 가져오기
+// 설명 - 포트폴리오 별 전체 리스트 가져오기
 Route::get('/portfolio/{portfolio}/des', [PortfolioDesController::class, 'show']);
 
-// 선택한 설명 데이터 가져오기
+// 설명 - 데이터 저장
+Route::post('/portfolio/{portfolio}/des', [PortfolioDesController::class, 'store']);
+
+// 설명 - 선택한 데이터 가져오기
 Route::get('/portfolioDes/{portfolioDes}', [PortfolioDesController::class, 'edit']);
 
-// 선택한 설명 데이터 업데이트
+// 설명 - 데이터 업데이트
 Route::patch('/portfolioDes/{portfolioDes}', [PortfolioDesController::class, 'update']);
 
-// 설명 삭제
+// 설명 - 데이터 삭제
 Route::delete('/portfolioDes/{portfolioDes}', [PortfolioDesController::class, 'destroy']);
