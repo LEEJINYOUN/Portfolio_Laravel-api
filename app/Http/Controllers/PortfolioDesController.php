@@ -5,60 +5,66 @@ namespace App\Http\Controllers;
 use App\Models\Portfolio;
 use App\Models\PortfolioDes;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PortfolioDesController extends Controller
 {
 
     public function store(Portfolio $portfolio, Request $request){
-        try{
 
+        try{
             // 테이블 생성
             $portfolioDes = PortfolioDes::create([
                 'portfolio_id' => $portfolio->id,
                 'des' => $request->des,
             ]);
 
-            // 설명 작성 실패
+            // 설명 생성 실패
             if (!$portfolioDes){
                 return response()->json([
-                    'message' => "설명 작성 실패했습니다. 다시 시도하세요."
+                    'message' => "설명 생성 실패했습니다. 다시 시도하세요."
                 ],400);
             }
 
-            // 설명 작성 성공
+            // 설명 생성 성공
             return response()->json([
                 'message' => "설명 작성 성공했습니다."
             ],201);
 
         } catch (\Exception $e) {
 
-            // 설명 작성 실패
+            // 설명 생성 실패
                 return response()->json([
+                    "result" => $e,
                     'message' => "오류가 있습니다."
                 ],500);
             }
     }
 
     public function show(Portfolio $portfolio){
+
+        // 포트폴리오 id 찾기
         $id = $portfolio->id;
+
+        // 포트폴리오 id와 일치하는 설명 리스트 찾기
         $PortfolioDes = PortfolioDes::where('portfolio_id', $id)->get();
 
-        // json 형식으로 결과 리턴
+        // 설명 리스트 가져오기 성공
         return response()->json([
             'results' => $PortfolioDes,
-            'message' => "설명 가져오기 성공"
+            'message' => "설명 리스트 가져오기 성공"
         ], 200);
     }
 
     public function edit(PortfolioDes $portfolioDes) {
+        // 특정 설명 가져오기 성공
         return response()->json([
             'results' => $portfolioDes,
-            'message' => "설명 가져오기 성공"
+            'message' => "특정 설명 가져오기 성공"
         ], 200);
     }
 
-    public function update(Request $request, PortfolioDes $portfolioDes, $id) {
+    public function update (Request $request, PortfolioDes $portfolioDes) {
+
         try{
             // 데이터 검증
             $validated = $request->validate([
@@ -85,6 +91,7 @@ class PortfolioDesController extends Controller
 
             // 설명 작성 실패
             return response()->json([
+                "result" => $e,
                 'message' => "오류가 있습니다."
             ],500);
         }
@@ -99,14 +106,15 @@ class PortfolioDesController extends Controller
             // 삭제 성공
             return response()->json([
                 'message' => "설명 삭제 완료."
-            ],201);
+            ], 201);
 
         } catch (\Exception $e){
 
             // 설명 삭제 실패
             return response()->json([
+                "result" => $e,
                 'message' => "오류가 있습니다."
-            ],500);
+            ], 500);
         }
     }
 }

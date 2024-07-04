@@ -71,7 +71,7 @@ Route::get('/portfolio/{portfolio}/des', [PortfolioDesController::class, 'show']
 Route::get('/portfolioDes/{portfolioDes}', [PortfolioDesController::class, 'edit']);
 
 // 선택한 설명 데이터 업데이트
-Route::put('/PortfolioDes/{PortfolioDes}', [PortfolioDesController::class,'update']);
+Route::patch('/portfolioDes/{portfolioDes}', [PortfolioDesController::class, 'update']);
 
 // 설명 삭제
 Route::delete('/portfolioDes/{portfolioDes}', [PortfolioDesController::class, 'destroy']);
