@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PortfolioDes extends Model
 {
@@ -16,4 +17,8 @@ class PortfolioDes extends Model
     protected $fillable = [
         'portfolio_id', 'des',
     ];
+
+    public function portfolio(): BelongsTo{
+        return $this->belongsTo(Portfolio::class);
+    }
 }

@@ -60,18 +60,18 @@ Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'readPortfolio
 Route::patch('/portfolio/{portfolio}', [PortfolioController::class,'updatePortfolio']);
 
 
+
 // 설명 생성
 Route::post('/portfolio/{portfolio}/des', [PortfolioDesController::class, 'store']);
 
 // 설명 데이터 가져오기
 Route::get('/portfolio/{portfolio}/des', [PortfolioDesController::class, 'show']);
 
-// 설명 삭제
-
-
 // 선택한 설명 데이터 가져오기
-Route::get('/des/{des}/edit', [PortfolioDesController::class, 'edit']);
-
+Route::get('/portfolioDes/{portfolioDes}', [PortfolioDesController::class, 'edit']);
 
 // 선택한 설명 데이터 업데이트
-Route::put('/des/{des}', [PortfolioDesController::class, 'update']);
+Route::put('/PortfolioDes/{PortfolioDes}', [PortfolioDesController::class,'update']);
+
+// 설명 삭제
+Route::delete('/portfolioDes/{portfolioDes}', [PortfolioDesController::class, 'destroy']);
