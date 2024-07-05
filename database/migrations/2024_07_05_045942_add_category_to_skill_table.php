@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // 스킬 테이블 설정
-        Schema::create('skill', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('url');
-            $table->timestamps();
+        Schema::table('skill', function (Blueprint $table) {
+            $table->string('category');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skill');
+        Schema::table('skill', function (Blueprint $table) {
+            $table->dropColumn('category');
+        });
     }
 };
