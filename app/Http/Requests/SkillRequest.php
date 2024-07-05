@@ -27,11 +27,13 @@ class SkillRequest extends FormRequest
         if (request()->isMethod('post')){
             return [
                 'title' => ['required', 'max:1024'],
+                'category' => ['required', 'max:1024'],
                 'url' => ['required', 'max:1024'],
             ];
         } else {
             return [
                 'title' => ['required', 'max:1024'],
+                'category' => ['required', 'max:1024'],
                 'url' => ['required', 'max:1024'],
             ];
         }
@@ -43,11 +45,13 @@ class SkillRequest extends FormRequest
         if (request()->isMethod('post')){
             return [
                 'title.required' => '제목을 입력하세요.',
+                'category.required' => '카테고리를 입력하세요.',
                 'url.required' => '이미지 경로를 입력하세요.',
             ];
         } else {
             return [
                 'title.required' => '제목을 입력하세요.',
+                'category.required' => '카테고리를 입력하세요.',
                 'url.required' => '이미지 경로를 입력하세요.',
             ];
         }

@@ -14,6 +14,6 @@ class Skill extends Model
 
     // 대량할당 될 수 있는 속성 (보안을 위해)
     protected $fillable = [
-        'title', 'url'
+        'title', 'category', 'url'
     ];
 }
