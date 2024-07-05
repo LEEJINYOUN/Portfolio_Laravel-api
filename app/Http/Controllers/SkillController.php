@@ -28,6 +28,7 @@ class SkillController extends Controller
             // 테이블 생성
             $skill = Skill::create([
                 'title' => $request->title,
+                'category' => $request->category,
                 'url' => $request->url,
             ]);
 
@@ -68,6 +69,7 @@ class SkillController extends Controller
             // 데이터 검증
             $validated = $request->validate([
                 'title' => ['required', 'max:1024'],
+                'category' => ['required', 'max:1024'],
                 'url' => ['required', 'max:1024'],
             ]);
 
