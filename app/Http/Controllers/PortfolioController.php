@@ -12,7 +12,7 @@ class PortfolioController extends Controller
     public function index (){
 
         // 포트폴리오 데이터 불러오기
-        $portfolio = Portfolio::get();
+        $portfolio = Portfolio::orderByDesc('created_at')->get();
 
         // json 형식으로 결과 리턴
         return response()->json([
